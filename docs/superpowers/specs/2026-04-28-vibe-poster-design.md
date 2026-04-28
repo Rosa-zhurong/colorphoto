@@ -1,37 +1,37 @@
-# Vibe Poster Design Spec
+# Vibe Poster (氛围海报) 设计说明
 
-## 1. Overview
-A pure frontend web application (React + Vite) that allows users to upload a landscape photo and automatically generates a minimalist, film-style poster. The poster features a solid background color extracted from the top edge of the photo, an AI-generated atmospheric English caption, the current date, and an overall film grain texture.
+## 1. 概述
+一个纯前端 Web 应用 (React + Vite)，允许用户上传横版/风景照片，并自动生成极简风格、带有胶片质感的海报。海报上半部分的背景色会自动从照片顶部提取，配有一句由 AI 生成的氛围感英文短句、当前日期，并整体覆盖一层胶片噪点。
 
-## 2. Core Features & User Flow
-1. **Upload**: User uploads an image via click or drag-and-drop.
-2. **Processing**:
-   - **Color Extraction**: Automatically sample the top ~10% of the uploaded image to calculate the average color for the upper background.
-   - **AI Caption Generation**: (Mocked initially, configurable API later) Send the image to an AI Vision API to generate a short, atmospheric English phrase.
-3. **Preview & Edit**:
-   - Display the generated poster in a mobile-first, vertical aspect ratio layout.
-   - Layout: Top half is the extracted solid color with centered text; Bottom half is the uploaded photo.
-   - Texture: A global noise/grain layer is applied to simulate film.
-   - Editability: Users can click the text to edit the caption/date directly. A hidden/subtle color picker allows manual adjustment of the background color.
-4. **Export**: A "Download" button to export the final canvas as a high-resolution image (PNG/JPEG).
+## 2. 核心功能与用户流程
+1. **上传**：用户通过点击或拖拽上传图片。
+2. **处理**：
+   - **颜色提取**：自动采样上传图片顶部约 10% 的区域，计算平均颜色，作为上半部分的背景色。
+   - **AI 智能配文**：（初期使用模拟数据，后续配置真实 API）将图片发送给 AI 视觉 API，生成一句简短的、有氛围感的英文短语。
+3. **预览与编辑**：
+   - 在移动端优先的垂直比例布局中展示生成的海报。
+   - 布局：上半部分为纯色背景加上居中文字；下半部分为上传的照片。
+   - 质感：应用全局噪点层模拟胶片质感。
+   - 可编辑性：用户可以点击文字直接修改文案/日期。提供一个隐藏的/低调的颜色选择器供手动微调背景色。
+4. **导出**：提供一个“下载海报”按钮，将最终的 Canvas 导出为高清图片 (PNG/JPEG) 保存到本地。
 
-## 3. UI/UX Design
-- **Style**: Minimalist, generous whitespace, indie-magazine/film-camera aesthetic.
-- **Typography**: Serif or Monospace fonts for the text, with wide letter-spacing.
-- **Layout**: Mobile-first design. On desktop, it appears as a centered mobile-proportioned card.
+## 3. UI/UX 设计
+- **风格**：极简主义，大量留白，独立杂志/胶片相机美学。
+- **字体**：正文使用优雅的衬线体 (Serif) 或等宽打字机字体 (Monospace)，配合较大的字间距。
+- **布局**：移动端优先设计。在电脑端显示为居中的手机比例卡片。
 
-## 4. Technical Architecture
-- **Framework**: React 18+ with Vite.
-- **Styling**: Tailwind CSS (or standard CSS/styled-components depending on final setup).
-- **Image Processing**: HTML5 `<canvas>` API.
-  - Draw background rect -> Draw image -> Draw text -> Overlay noise pattern (using `globalCompositeOperation`).
-- **AI Integration**:
-  - Implement a mock service first for rapid UI development.
-  - Add a settings modal for users to input their own API Key (e.g., OpenAI/Anthropic) for real vision-based generation. All API calls happen client-side.
-- **State Management**: React Context or simple state for holding image data, extracted color, and generated text.
+## 4. 技术架构
+- **框架**：React 18+ 配合 Vite。
+- **样式**：Tailwind CSS。
+- **图片处理**：HTML5 `<canvas>` API。
+  - 绘制流程：绘制背景矩形 -> 绘制图片 -> 绘制文字 -> 叠加噪点层 (使用 `globalCompositeOperation`)。
+- **AI 集成**：
+  - 首先实现一个模拟服务以便快速开发 UI。
+  - 添加一个设置面板，供用户输入自己的 API Key (如 OpenAI/Anthropic/阿里云等) 进行真实的视觉生成。所有 API 调用都在客户端进行。
+- **状态管理**：React Context 或基础的 State 用于保存图片数据、提取的颜色和生成的文字。
 
-## 5. Implementation Phases
-1. **Phase 1: Scaffolding & Basic UI**: Set up Vite project, create upload zone and basic layout.
-2. **Phase 2: Canvas Processing**: Implement image drawing, color extraction, and basic text rendering on Canvas.
-3. **Phase 3: AI & Texture**: Add the mock AI generation, implement the noise overlay layer.
-4. **Phase 4: Polish & Export**: Implement text editing, color fine-tuning, and the image download functionality.
+## 5. 实施阶段
+1. **第一阶段：项目搭建与基础 UI**：初始化 Vite 项目，创建上传区域和基础布局。
+2. **第二阶段：Canvas 处理**：实现在 Canvas 上绘制图片、提取颜色以及基础文本渲染。
+3. **第三阶段：AI 与质感**：添加模拟的 AI 生成功能，实现噪点覆盖层。
+4. **第四阶段：打磨与导出**：实现文本编辑、颜色微调以及图片下载功能。

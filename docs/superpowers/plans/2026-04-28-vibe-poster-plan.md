@@ -1,25 +1,25 @@
-# Vibe Poster Implementation Plan
+# Vibe Poster (氛围海报) 实施计划
 
-## Phase 1: Scaffolding & Setup
-1. **Initialize Project**: Create a new React + Vite project with TypeScript and Tailwind CSS.
-2. **Clean Up**: Remove default Vite boilerplate and set up the main layout container (mobile-first styling).
-3. **Asset Preparation**: Find or generate a default noise texture image for the film grain effect.
+## 第一阶段：项目搭建与初始化
+1. **初始化项目**：创建一个基于 TypeScript 和 Tailwind CSS 的 React + Vite 新项目。
+2. **清理代码**：移除 Vite 默认的样板代码，并设置主布局容器（移动端优先样式）。
+3. **准备素材**：寻找或生成一个默认的噪点纹理图片，用于实现胶片颗粒效果。
 
-## Phase 2: Core Components & Image Upload
-1. **Uploader Component**: Build a drag-and-drop / click-to-upload area.
-2. **State Management**: Set up state for the uploaded image URL, extracted color, generated text, and current date.
-3. **Canvas Component Skeleton**: Create the main `PosterCanvas` component that will handle the drawing.
+## 第二阶段：核心组件与图片上传
+1. **上传组件**：构建一个支持拖拽和点击上传的区域。
+2. **状态管理**：为上传的图片 URL、提取的背景色、生成的文字以及当前日期设置状态。
+3. **Canvas 组件骨架**：创建主要的 `PosterCanvas` 组件，该组件将负责所有绘图工作。
 
-## Phase 3: Canvas Processing & Logic
-1. **Image Drawing**: Implement drawing the uploaded image onto the lower half of the Canvas.
-2. **Color Extraction**: Write utility to sample the top pixels of the uploaded image and calculate the average RGB. Fill the upper half of the Canvas with this color.
-3. **Text Rendering**: Draw the main caption and date on the Canvas using appropriate fonts (e.g., Courier or a web serif font).
+## 第三阶段：Canvas 处理与核心逻辑
+1. **图片绘制**：实现将上传的照片绘制到 Canvas 的下半部分。
+2. **颜色提取**：编写工具函数，对上传图片的顶部像素进行采样并计算平均 RGB 值。用该颜色填充 Canvas 的上半部分。
+3. **文本渲染**：在 Canvas 上使用合适的字体（如 Courier 或网络衬线字体）绘制主标题和日期。
 
-## Phase 4: AI Mock & Texture
-1. **AI Mock Service**: Create a function that simulates a delay and returns a random atmospheric phrase when an image is uploaded.
-2. **Noise Overlay**: Implement the logic to draw the noise texture over the entire Canvas using `globalCompositeOperation` to blend it.
+## 第四阶段：AI 模拟与质感叠加
+1. **AI 模拟服务**：创建一个模拟函数，在上传图片后延迟返回一句随机的氛围感英文短语。
+2. **噪点叠加**：实现逻辑，将噪点纹理绘制到整个 Canvas 上，并使用 `globalCompositeOperation` 进行混合。
 
-## Phase 5: Polish & Export
-1. **Interactivity**: (Optional for V1 Canvas, but can use DOM overlays for editing) Allow clicking on the text to open a prompt/input to change the text and redraw the Canvas.
-2. **Export Function**: Add a "Download" button that converts the Canvas to a data URL and triggers a file download.
-3. **Responsive UI**: Ensure the canvas and UI scale nicely on desktop and mobile screens.
+## 第五阶段：细节打磨与图片导出
+1. **交互功能**：允许用户点击文本修改文字内容并重新绘制 Canvas。
+2. **导出功能**：添加“下载海报”按钮，将 Canvas 转换为数据 URL 并触发文件下载。
+3. **响应式 UI**：确保 Canvas 和 UI 在桌面和移动端屏幕上都能良好缩放。
