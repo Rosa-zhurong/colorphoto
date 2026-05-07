@@ -5,6 +5,7 @@ type Props = {
   backgroundColor: string
   caption: string
   dateText: string
+  location: string
   image: HTMLImageElement | null
 }
 
@@ -13,7 +14,7 @@ const POSTER_HEIGHT = 1440
 const HEADER_RATIO = 0.48
 
 const PosterCanvas = forwardRef<HTMLCanvasElement, Props>(function PosterCanvas(
-  { backgroundColor, caption, dateText, image },
+  { backgroundColor, caption, dateText, location, image },
   ref,
 ) {
   const localRef = useRef<HTMLCanvasElement | null>(null)
@@ -51,20 +52,31 @@ const PosterCanvas = forwardRef<HTMLCanvasElement, Props>(function PosterCanvas(
     }
 
     const titleY = headerHeight * 0.48
-    const dateY = headerHeight * 0.66
+    const dateY = headerHeight * 0.62
+    const locationY = headerHeight * 0.74
 
-    ctx.fillStyle = 'rgba(0,0,0,0.55)'
     ctx.textBaseline = 'middle'
 
-    ctx.font = '600 44px "Courier New", Courier, monospace'
-    drawTrackedText(ctx, caption, POSTER_WIDTH / 2, titleY, 6)
+    // Draw Caption (Title)
+    ctx.font = '500 32px "Playfair Display", Georgia, serif';
+    ctx.fillStyle = '#1a1a1a';
+    drawTrackedText(ctx, caption, POSTER_WIDTH / 2, titleY, 12);
 
-    ctx.font = '500 22px "Courier New", Courier, monospace'
-    drawTrackedText(ctx, dateText, POSTER_WIDTH / 2, dateY, 8)
+    // Draw Date
+    ctx.font = '400 16px "Courier New", Courier, monospace';
+    ctx.fillStyle = '#6b7280';
+    drawTrackedText(ctx, dateText, POSTER_WIDTH / 2, dateY, 6);
+
+    // Draw Location
+    if (location) {
+      ctx.font = '400 16px "Courier New", Courier, monospace';
+      ctx.fillStyle = '#6b7280';
+      drawTrackedText(ctx, location, POSTER_WIDTH / 2, locationY, 4);
+    }
 
     // Add Film Grain Noise Overlay
     drawNoise(ctx, POSTER_WIDTH, POSTER_HEIGHT, 0.15)
-  }, [backgroundColor, caption, dateText, image, canvasRef])
+  }, [backgroundColor, caption, dateText, location, image, canvasRef])
 
   return (
     <canvas
