@@ -48,6 +48,19 @@ function App() {
       if (exif.latitude && exif.longitude) {
         const city = getCityFromCoordinates(exif.latitude, exif.longitude)
         setLocation(city || pickCity())
+      } else if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            if (cancelled) return
+            const city = getCityFromCoordinates(pos.coords.latitude, pos.coords.longitude)
+            setLocation(city || pickCity())
+          },
+          () => {
+            if (cancelled) return
+            setLocation(pickCity())
+          },
+          { timeout: 5000 }
+        )
       } else {
         setLocation(pickCity())
       }
